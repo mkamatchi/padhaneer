@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PadhaNeer Navigation</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            background-color: #8B6B3E;
+            width: 100%;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 1px solid #6b4f2e;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Ensures left alignment */
+        }
+
+        nav a i {
+            margin-right: 10px;
+        }
+
+        nav a:hover {
+            background-color: #6b4f2e;
+        }
+
+        @media (max-width: 600px) {
+            nav a {
+                text-align: left;
+                justify-content: flex-start; /* Maintain left alignment on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="know.html" target="contentFrame"><i class="fas fa-info-circle"></i> About PadhaNeer</a>
+        <a href="palm_tree_story.html" target="contentFrame"><i class="fas fa-tree"></i> Palm Tree Story</a>
+        <a href="benefits.html" target="contentFrame"><i class="fas fa-heartbeat"></i> Health & Benefits</a>
+        <a href="facts_myths.html" target="contentFrame"><i class="fas fa-question-circle"></i> Facts vs Myths</a>
+        <a href="future_palmyra.html" target="contentFrame"><i class="fas fa-seedling"></i> Future of Palmyra</a>
+		<a href="ourteam.html" target="contentFrame"><i class="fas fa-user-friends"></i> Our Team</a>
+        <a href="get_involved.html" target="contentFrame"><i class="fas fa-hands-helping"></i> Get Involved</a>
+        <a href="feedback.html" target="contentFrame"><i class="fas fa-comment-dots"></i> Feedback</a>
+    </nav>
+
+</body>
+</html>

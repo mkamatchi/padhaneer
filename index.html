@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PadhaNeer Connect</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fffaf0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header, footer {
+            background-color: #3C8C4D;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #menuFrame {
+            width: 220px;
+            border: none;
+            height: 100%;
+        }
+
+        #contentFrame {
+            flex: 1;
+            border: none;
+            height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                flex-direction: column;
+            }
+
+            #menuFrame {
+                width: 100%;
+                height: auto;
+            }
+
+            #contentFrame {
+                height: calc(100vh - 240px); /* Adjust for header + menu + footer */
+            }
+        }
+    </style>
+</head>
+<body>
+   <header style="background-color: #3C8C4D; color: white; padding: 20px 0;">
+  <table style="margin: 0 auto; width: 80%; height: 160px;">
+    <tr>
+      <!-- Text Column: Right Aligned -->
+      <td style="width: 50%; text-align: right; vertical-align: middle; padding-right: 20px;">
+        <div>
+          <h1 style="margin: 0;">PadhaNeer Connect</h1>
+          <p style="margin: 5px 0;">Drink Pure. Live Sure.</p>
+        </div>
+      </td>
+
+      <!-- Image Column: Left Aligned -->
+      <td style="width: 50%; text-align: left; vertical-align: middle; padding-left: 20px;">
+        <img src="images/logo.jpg" alt="PadhaNeer Logo" style="max-width: 120px; height: auto; border-radius: 8px;" />
+      </td>
+    </tr>
+  </table>
+</header>
+
+
+
+    <div class="main">
+        <iframe id="menuFrame" src="menu.html"></iframe>
+        <iframe id="contentFrame" name="contentFrame" src="know.html"></iframe>
+    </div>
+
+    <footer>
+	  <p>© 2025 PadhaNeer Connect | Every Sip Counts – Support Nature, Support PadhaNeer</p>
+	  <p>
+		<a href="askbot.html" target="contentFrame" style="color: white; font-weight: bold; text-decoration: underline;">
+		  <i class="fas fa-robot"></i> Ask PadhaNeer Bot
+		</a>
+	  </p>
+	</footer>
+
+</body>
+</html>

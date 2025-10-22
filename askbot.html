@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask PadhaNeer Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f5f0;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #8B6B3E;
+            margin-bottom: 10px;
+        }
+
+        .bot-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #8B6B3E;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6b4f2e;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #f0e8dc;
+            padding: 15px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bot-container">
+        <h1>Ask PadhaNeer Bot</h1>
+        <p>Type your question about PadhaNeer, Palmyra trees, or health benefits below:</p>
+
+        <input type="text" id="question" placeholder="e.g. What are the benefits of PadhaNeer?">
+        <button onclick="askBot()">Ask</button>
+
+        <div id="response"></div>
+    </div>
+
+    <script>
+        function askBot() {
+            const question = document.getElementById('question').value;
+            const responseBox = document.getElementById('response');
+            responseBox.innerText = "Thinking...";
+
+            fetch('https://your-replit-url.replit.app/ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question })
+            })
+            .then(res => res.json())
+            .then(data => {
+                responseBox.innerText = data.answer;
+            })
+            .catch(err => {
+                responseBox.innerText = "Oops! Something went wrong. Please try again.";
+                console.error(err);
+            });
+        }
+    </script>
+
+</body>
+</html>
