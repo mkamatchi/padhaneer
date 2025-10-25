@@ -1,97 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PadhaNeer Connect</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fffaf0;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PadhaNeer Connect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fffaf0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
 
-        header, footer {
-            background-color: #3C8C4D;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
+    header {
+      background-color: #3C8C4D;
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
 
-        .main {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        #menuFrame {
-            width: 220px;
-            border: none;
-            height: 100%;
-        }
+    .header-title {
+      flex: 1;
+      min-width: 200px;
+    }
 
-        #contentFrame {
-            flex: 1;
-            border: none;
-            height: 100%;
-        }
+    .header-title h1 {
+      margin: 0;
+      font-size: 24px;
+    }
 
-        @media (max-width: 768px) {
-            .main {
-                flex-direction: column;
-            }
+    .header-title p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
 
-            #menuFrame {
-                width: 100%;
-                height: auto;
-            }
+    .header-images {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-            #contentFrame {
-                height: calc(100vh - 240px); /* Adjust for header + menu + footer */
-            }
-        }
-    </style>
+    .header-images img {
+      max-width: 100px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .header-map-link {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    .header-map-link a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      background-color: #2f6f3e;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .header-map-link a:hover {
+      background-color: #245c32;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    #menuFrame {
+      width: 220px;
+      border: none;
+      height: 100%;
+    }
+
+    #contentFrame {
+      flex: 1;
+      border: none;
+      height: 100%;
+    }
+
+    footer {
+      background-color: #3C8C4D;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer a {
+      color: white;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .header-title {
+        margin-bottom: 15px;
+      }
+
+      .header-images {
+        justify-content: center;
+      }
+
+      .header-map-link {
+        position: static;
+        margin-top: 10px;
+      }
+
+      .main {
+        flex-direction: column;
+      }
+
+      #menuFrame {
+        width: 100%;
+        height: auto;
+      }
+
+      #contentFrame {
+        height: calc(100vh - 240px);
+      }
+	  
+	  @keyframes floatBot {
+		  0%   { transform: translateY(0); }
+		  50%  { transform: translateY(-8px); }
+		  100% { transform: translateY(0); }
+		}
+
+		.floating-icon {
+		  animation: floatBot 2s ease-in-out infinite;
+		  display: inline-block;
+		}
+
+    }
+  </style>
 </head>
 <body>
-   <header style="background-color: #3C8C4D; color: white; padding: 20px 0;">
-  <table style="margin: 0 auto; width: 80%; height: 160px;">
-    <tr>
-      <!-- Text Column: Right Aligned -->
-      <td style="width: 50%; text-align: right; vertical-align: middle; padding-right: 20px;">
-        <div>
-          <h1 style="margin: 0;">PadhaNeer Connect</h1>
-          <p style="margin: 5px 0;">Drink Pure. Live Sure.</p>
-        </div>
-      </td>
 
-      <!-- Image Column: Left Aligned -->
-      <td style="width: 50%; text-align: left; vertical-align: middle; padding-left: 20px;">
-        <img src="images/logo.jpg" alt="PadhaNeer Logo" style="max-width: 120px; height: auto; border-radius: 8px;" />
-      </td>
-    </tr>
-  </table>
+  <header>
+  <div class="header-container" style="justify-content: center; align-items: center; text-align: center;">
+    
+    <!-- Logo + Title Group -->
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <img src="images/palm_tree.png" alt="Palm Tree Logo" style="height: 50px; border-radius: 8px; background-color: transparent;filter: brightness(0) invert(1);">
+      
+      <div class="header-title" style="text-align: left;">
+        <h1 style="margin: 0;font-size:30px">PadhaNeer Connect</h1>
+        <p style="margin: 5px 0;">Drink Pure. Live Sure.</p>
+      </div>
+    </div>
+
+    <!-- Map Link -->
+    <div class="header-map-link" style="position: absolute; top: 20px; right: 20px;">
+      <a href="farmers_map.html" style="color: white;">
+        <i class="fas fa-map-marked-alt"></i> Palm Guardians
+      </a>
+    </div>
+
+  </div>
 </header>
 
 
 
-    <div class="main">
-        <iframe id="menuFrame" src="menu.html"></iframe>
-        <iframe id="contentFrame" name="contentFrame" src="know.html"></iframe>
-    </div>
 
-    <footer>
-	  <p>© 2025 PadhaNeer Connect | Every Sip Counts – Support Nature, Support PadhaNeer</p>
-	  <p>
-		<a href="askbot.html" target="contentFrame" style="color: white; font-weight: bold; text-decoration: underline;">
-		  <i class="fas fa-robot"></i> Ask PadhaNeer Bot
-		</a>
-	  </p>
-	</footer>
+
+  <div class="main">
+    <iframe id="menuFrame" src="menu.html"></iframe>
+    <iframe id="contentFrame" name="contentFrame" src="know.html"></iframe>
+  </div>
+
+  <footer>
+    <p>© 2025 PadhaNeer Connect | Every Sip Counts – Support Nature, Support PadhaNeer</p>
+    <p>
+      <a href="askbot.html" target="contentFrame">
+        <i class="fas fa-robot floating-icon"></i> Ask PadhaNeer Bot
+      </a>
+    </p>
+  </footer>
 
 </body>
 </html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmers List - PadhaNeer Connect</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fffaf0;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #3C8C4D;
+      margin-bottom: 15px;
+    }
+    #searchBar {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border: 2px solid #3C8C4D;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #3C8C4D;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f2fdf2;
+    }
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌴 PadhaNeer Connect – Palm Guardians Directory</h1>
+
+  <input type="text" id="searchBar" placeholder="Search by name, occupation, or district...">
+  <div style="text-align: right; margin-top: 30px;">
+  <a href="index.html" style="color: #3C8C4D; text-decoration: none; font-weight: bold;">
+    ⬅️ Back to Home
+  </a>
+</div>
+
+
+  <table id="farmersTable">
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Occupation</th>
+        <th>District</th>
+        <th>State</th>
+        <th>Contact</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <script>
+    const farmers = [
+      {name:"Pandiyan", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"9500627289", lat:11.9394, lon:79.4924, img:"images/farmers/pandiyan.jpg"},
+      {name:"Godson Samuel", occupation:"Palm Researcher, Writer", district:"Mumbai", state:"Maharashtra", contact:"9080250653", lat:19.0760, lon:72.8777, img:"images/farmers/default_farmer.jpg"},
+      {name:"Ashok Kumar", occupation:"Farmer, Palm enthusiast", district:"Chennai", state:"TamilNadu", contact:"7760940880", lat:13.0827, lon:80.2707, img:"images/farmers/default_farmer.jpg"},
+      {name:"Gunasekaran", occupation:"Palm Climber, Advocate", district:"Thanjavur", state:"TamilNadu", contact:"9600428150", lat:10.7870, lon:79.1378, img:"images/farmers/default_farmer.jpg"},
+      {name:"Sankar", occupation:"Palm Climber/Tapper", district:"Kanniyakumar", state:"TamilNadu", contact:"9578065700", lat:8.0883, lon:77.5385, img:"images/farmers/default_farmer.jpg"},
+      {name:"Dinesh", occupation:"Palm Climber/Tapper", district:"Pollachi", state:"TamilNadu", contact:"9750996456", lat:10.6587, lon:77.0104, img:"images/farmers/default_farmer.jpg"},
+      {name:"Deepan", occupation:"Advocate", district:"Chennai", state:"TamilNadu", contact:"9791119203", lat:13.0827, lon:80.2707, img:"images/farmers/default_farmer.jpg"},
+      {name:"Perumal Thiruthavadivel", occupation:"Palm Climber/Tapper", district:"Kanchipuram", state:"TamilNadu", contact:"9444138207", lat:12.8342, lon:79.7036, img:"images/farmers/default_farmer.jpg"},
+      {name:"Arun Kumar", occupation:"Palm Climber/Tapper", district:"Ranipet", state:"TamilNadu", contact:"9788411602", lat:12.9493, lon:79.3181, img:"images/farmers/default_farmer.jpg"},
+      {name:"Paramsivam", occupation:"Palm Climber/Tapper", district:"Chengalpattu", state:"TamilNadu", contact:"9566478030", lat:12.6920, lon:79.9771, img:"images/farmers/default_farmer.jpg"},
+      {name:"Venkatachalam", occupation:"Palm Climber/Tapper", district:"Salem", state:"TamilNadu", contact:"9524446456", lat:11.6643, lon:78.1460, img:"images/farmers/default_farmer.jpg"},
+      {name:"Tamilarasan", occupation:"Palm Climber/Tapper", district:"Dharmapuri", state:"TamilNadu", contact:"6382366867", lat:12.1211, lon:78.1582, img:"images/farmers/default_farmer.jpg"},
+      {name:"Robin", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"6383274385", lat:11.9394, lon:79.4924, img:"images/farmers/default_farmer.jpg"},
+      {name:"Nithyanandam", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"9943195043", lat:11.9394, lon:79.4924, img:"images/farmers/default_farmer.jpg"},
+      {name:"Yesu Prakash", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"7667127284", lat:11.9394, lon:79.4924, img:"images/farmers/default_farmer.jpg"},
+      {name:"Janakiraman", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"7667668325", lat:11.9394, lon:79.4924, img:"images/farmers/default_farmer.jpg"},
+      {name:"Vadivelu Subramaniam", occupation:"Palm Activist", district:"Tirupattur", state:"TamilNadu", contact:"8270077060", lat:12.4966, lon:78.5656, img:"images/farmers/default_farmer.jpg"},
+      {name:"Ananda Rajan", occupation:"Palm Climber/Tapper", district:"Tirunelveli", state:"TamilNadu", contact:"9789763688", lat:8.7139, lon:77.7567, img:"images/farmers/default_farmer.jpg"},
+      {name:"Saravanan", occupation:"Palm Climber/Tapper", district:"Tiruvanamalai", state:"TamilNadu", contact:"7418124212", lat:12.2253, lon:79.0747, img:"images/farmers/default_farmer.jpg"},
+      {name:"Arulanand", occupation:"Palm Activist", district:"Sivagangai", state:"TamilNadu", contact:"9786057501", lat:9.8473, lon:78.4805, img:"images/farmers/default_farmer.jpg"},
+      {name:"Sudalaimani", occupation:"Palm Climber/Tapper", district:"Tirunelveli", state:"TamilNadu", contact:"9698485370", lat:8.7139, lon:77.7567, img:"images/farmers/default_farmer.jpg"},
+      {name:"Ponnaiyan", occupation:"Palm Climber/Tapper", district:"Cuddalore", state:"TamilNadu", contact:"6381839223", lat:11.7480, lon:79.7714, img:"images/farmers/default_farmer.jpg"},
+      {name:"Chanderasekaran", occupation:"Palm Farmer", district:"Namakkal", state:"TamilNadu", contact:"9842864512", lat:11.2189, lon:78.1652, img:"images/farmers/default_farmer.jpg"},
+      {name:"Duraisamy", occupation:"Head of Palm Jaggery Production Cooperative Society", district:"Trichy", state:"TamilNadu", contact:"8526853888", lat:10.7905, lon:78.7047, img:"images/farmers/default_farmer.jpg"},
+      {name:"Parthiban", occupation:"Palm Climber/Tapper", district:"Krishnagiri", state:"TamilNadu", contact:"9659916858", lat:12.5191, lon:78.2137, img:"images/farmers/default_farmer.jpg"},
+      {name:"S.M.Murugan", occupation:"Palm Activist", district:"Tenkasi", state:"TamilNadu", contact:"9715914909", lat:8.9590, lon:77.3153, img:"images/farmers/default_farmer.jpg"},
+      {name:"Antony", occupation:"Palm Climber/Tapper", district:"Thoothukudi", state:"TamilNadu", contact:"9080490560", lat:8.7642, lon:78.1348, img:"images/farmers/default_farmer.jpg"},
+      {name:"Kesavan", occupation:"Palm Leaf Craftsman", district:"Tiruvallur", state:"TamilNadu", contact:"6380775372", lat:13.1436, lon:79.9080, img:"images/farmers/default_farmer.jpg"},
+      {name:"Samuel Rajkumar", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"7708587235", lat:11.9394, lon:79.4924, img:"images/farmers/default_farmer.jpg"}
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+    const searchBar = document.getElementById("searchBar");
+
+    function loadFarmers(list) {
+      tableBody.innerHTML = "";
+      list.forEach(f => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td><img src='${f.img}' alt='${f.name}'></td><td>${f.name}</td><td>${f.occupation}</td><td>${f.district}</td><td>${f.state}</td><td>${f.contact}</td>`;
+        tableBody.appendChild(row);
+      });
+    }
+
+    loadFarmers(farmers);
+
+	searchBar.addEventListener("input", () => {
+      const text = searchBar.value.toLowerCase();
+      const filtered = farmers.filter(f =>
+        f.name.toLowerCase().includes(text) ||
+        f.occupation.toLowerCase().includes(text) ||
+        f.district.toLowerCase().includes(text)
+      );
+      loadFarmers(filtered);
+    });
+  
+    
+  </script>
+</body>
+</html>
