@@ -1,45 +1,470 @@
-<section style="padding: 20px; max-width: 1000px; margin: auto;">
-   <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 20px;">
-  <!-- Left Image -->
-  <div style="flex: 0 0 200px;">
-    <img src="images/cultural_essence.jpg" alt="Padhaneer Cultural Image" style="height: 200px; border-radius: 10px; object-fit: cover;">
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cultural Essence of PadhaNeer</title>
+  <link rel="icon" type="image/png" href="images/palm_tree.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Critical navbar CSS to avoid flicker before JS loads -->
+  <style id="critical-nav">
+    .navbar{position:fixed;top:0;left:0;right:0;height:80px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);z-index:1000}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:40px}
+  </style>
+  <script src="site-chrome.js" defer></script>
+  <style>
+    /* Navbar styles replicated for consistency with index.html */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.5rem; color: var(--primary-green); text-decoration: none; }
+    .logo img { height: 40px; filter: brightness(0) saturate(100%) invert(20%) sepia(25%) saturate(1000%) hue-rotate(120deg); }
+    .nav-menu { display: flex; list-style: none; gap: 2rem; align-items: center; }
+    .nav-link { color: var(--text-dark); text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative; }
+    .nav-link:hover { color: var(--primary-green); }
+    .nav-link.active { color: var(--primary-green); }
+    .cta-button { background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); color: white; padding: 0.5rem 1rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(45,90,61,0.3); }
+    .mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--primary-green); cursor: pointer; }
+    :root {
+      --primary-green: #2D5A3D;
+      --secondary-green: #4A7C59;
+      --accent-green: #6B9B7F;
+      --light-green: #E8F5E8;
+      --warm-beige: #F7F3E9;
+      --golden: #D4AF37;
+      --text-dark: #2C3E50;
+      --text-light: #6C7B7F;
+      --white: #FFFFFF;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
 
-  <!-- Right Two Images -->
-  <div style="flex: 1; display: flex; gap: 20px;">
-    <div style="flex: 1;">
-      <img src="images/cultural_olai.jpg" alt="Palm Heritage 1" style="height: 200px; width: 100%; border-radius: 10px; object-fit: cover;">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding: 120px 2rem 2rem; /* top padding for fixed navbar */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: white;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="culture" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="3" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23culture)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-bottom: 1.25rem;
+    }
+
+    .image-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin: 3rem 2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px var(--shadow);
+      transition: all 0.3s ease;
+      aspect-ratio: 4/3;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /*background: linear-gradient(135deg, rgba(45, 90, 61, 0.8), rgba(74, 124, 89, 0.8));*/
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    .content-section {
+      padding: 3rem 2rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary-green);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--golden);
+      border-radius: 2px;
+    }
+
+    .cultural-section {
+      background: var(--light-green);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+    }
+
+    .cultural-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--primary-green);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cultural-section h3 i {
+      color: var(--golden);
+    }
+
+    .cultural-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .cultural-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px var(--shadow);
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--primary-green);
+    }
+
+    .cultural-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .cultural-card h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .cultural-card p {
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .heritage-section {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin-top: 3rem;
+    }
+
+    .heritage-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--golden);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .heritage-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .heritage-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .heritage-card h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--golden);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .heritage-card p {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+    }
+
+    .quote-section {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--warm-beige);
+      border-radius: 20px;
+      margin: 3rem 0;
+    }
+
+    .quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--primary-green);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .quote-author {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .hero-section {
+        padding: 1.25rem 1rem;
+      }
+
+      .hero-section h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .hero-section .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .image-gallery {
+        grid-template-columns: 1fr;
+        margin: 2rem 1rem;
+      }
+
+      .content-section {
+        padding: 2rem 1rem;
+      }
+
+      .cultural-grid,
+      .heritage-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cultural-card,
+      .heritage-card {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quote {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"><div class="navbar"><div class="nav-container"><a class="logo"><img src="images/logo.jpg" alt="Logo"></a><ul class="nav-menu"></ul></div></div></div>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Cultural Essence of PadhaNeer</h1>
+        <p class="subtitle">A Living Heritage of Indian Tradition</p>
+      </div>
     </div>
-    <div style="flex: 1;">
-      <img src="images/cultural_palm.jpg" alt="Palm Heritage 2" style="height: 200px; width: 100%; border-radius: 10px; object-fit: cover;">
+
+    <!-- Image Gallery -->
+    <div class="image-gallery">
+      <div class="gallery-item">
+        <img src="images/cultural_essence.jpg" alt="Cultural Essence">
+        <!-- <div class="gallery-overlay">
+          <i class="fas fa-search-plus"></i>
+        </div> -->
+      </div>
+      <div class="gallery-item">
+        <img src="images/cultural_olai.jpg" alt="Palm Heritage">
+        <!--<div class="gallery-overlay">
+          <i class="fas fa-search-plus"></i>
+        </div>-->
+      </div>
+      <div class="gallery-item">
+        <img src="images/cultural_palm.jpg" alt="Traditional Palm">
+        <!--<div class="gallery-overlay">
+          <i class="fas fa-search-plus"></i>
+        </div>-->
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-section">
+      <!-- Cultural Significance -->
+      <div class="cultural-section">
+        <h3><i class="fas fa-temple"></i> Cultural Significance</h3>
+        <div class="cultural-grid">
+          <div class="cultural-card">
+            <h4>Regional Popularity</h4>
+            <p>Padhaneer is especially popular in Tamil Nadu and parts of Kerala and Karnataka. It is enjoyed mostly during the hot summer months for its natural cooling and refreshing taste.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Ancient Heritage Drink</h4>
+            <p>Historical records and Tamil Sangam Literature mention the palmyra tree as a vital part of South Indian life. Padhaneer was a traditional energy drink consumed by farmers and travellers long before modern beverages were introduced.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Symbol of Tradition</h4>
+            <p>Padhaneer represents the ancient village lifestyle and reflects the connection between people and nature. It is a part of Tamil heritage and stands as a reminder of eco-friendly and sustainable living.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Harvest Season Drink</h4>
+            <p>Padhaneer is commonly available during the summer season, when skilled palm tappers collect the sweet sap from the palmyra tree before sunrise to keep it fresh and unfermented.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Festivals and Celebrations</h4>
+            <p>In several South Indian villages, Padhaneer is offered to deities during festivals and shared as prasadam. It is also served during cultural gatherings and family events, symbolising purity, hospitality and joy.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Eco-friendly Tradition</h4>
+            <p>Collecting palm sap is a traditional occupation carried out by skilled artisans known as Panans in Tamil. The practice highlights the importance of preserving palm trees, which are known as "Karpaga Maram" (wish-fulfilling tree).</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Community Heritage</h4>
+            <p>The art of tapping and preserving Padhaneer is a heritage skill passed down through generations. It showcases traditional knowledge, village craftsmanship, and the wisdom of working in harmony with nature.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Cultural Hospitality</h4>
+            <p>Offering Padhaneer to guests reflects warmth, respect and generosity in South Indian culture. It is a simple yet meaningful gesture of welcoming others with the pure, natural drink.</p>
+          </div>
+          <div class="cultural-card">
+            <h4>Spiritual Symbolism</h4>
+            <p>The freshness of Padhaneer represents purity, simplicity and divine connection. In traditional Ayurvedic belief, it helps balance the body's heat and promotes wellness, linking culture with health.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote Section -->
+      <div class="quote-section">
+        <p class="quote">"Every part of the tree—leaf, fruit, trunk and sap—is useful to humans."</p>
+        <p class="quote-author">Traditional Tamil Wisdom</p>
+      </div>
+
+      <!-- Heritage Importance -->
+      <div class="heritage-section">
+        <h3><i class="fas fa-monument"></i> Heritage Importance</h3>
+        <div class="heritage-grid">
+          <div class="heritage-card">
+            <h4>Traditional Skill Preservation</h4>
+            <p>The methods of collecting and storing Padhaneer are ancient heritage practices, demonstrating the wisdom and eco-awareness of South Indian rural communities.</p>
+          </div>
+          <div class="heritage-card">
+            <h4>Historical Continuity</h4>
+            <p>For centuries, Padhaneer has been part of daily life, symbolising continuity between the past and present and preserving an important aspect of Tamil and Dravidian heritage.</p>
+          </div>
+          <div class="heritage-card">
+            <h4>Cultural Identity</h4>
+            <p>Padhaneer stands as a symbol of South Indian identity, promoting natural living, respect for tradition and pride in local culture.</p>
+          </div>
+          <div class="heritage-card">
+            <h4>Modern Revival</h4>
+            <p>In recent years, government and cooperative initiatives have encouraged the revival of Padhaneer as a healthy, traditional beverage, ensuring that this heritage drink continues to thrive in modern times.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-
-  <!-- Content Layout -->
-  <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px;">
-    <div style="flex: 1 1 100%;">
-            <h4 style="color: #3C8C4D;">CULTURAL SIGNIFICANCE</h4>
-      <ul style="line-height: 1.6;">
-        <li><strong>Regional Popularity:</strong> Padhaneer is especially popular in Tamil Nadu and parts of Kerala and Karnataka. It is enjoyed mostly during the hot summer months for its natural cooling and refreshing taste.</li>
-        <li><strong>Ancient Heritage Drink:</strong> Historical records and Tamil Sangam Literature mention the palmyra tree as a vital part of South Indian life. Padhaneer was a traditional energy drink consumed by farmers and travellers long before modern beverages were introduced.</li>
-        <li><strong>Symbol of Tradition:</strong> Padhaneer represents the ancient village lifestyle and reflects the connection between people and nature. It is a part of Tamil heritage and stands as a reminder of eco-friendly and sustainable living.</li>
-        <li><strong>Harvest Season Drink:</strong> Padhaneer is commonly available during the summer season, when skilled palm tappers collect the sweet sap from the palmyra tree before sunrise to keep it fresh and unfermented.</li>
-        <li><strong>Festivals and Celebrations:</strong> In several South Indian villages, Padhaneer is offered to deities during festivals and shared as prasadam. It is also served during cultural gatherings and family events, symbolising purity, hospitality and joy.</li>
-        <li><strong>Eco-friendly Tradition:</strong> Collecting palm sap is a traditional occupation carried out by skilled artisans known as Panans in Tamil. The practice highlights the importance of preserving palm trees, which are known as “Karpaga Maram” (wish-fulfilling tree). Every part of the tree—leaf, fruit, trunk and sap—is useful to humans.</li>
-        <li><strong>Community Heritage:</strong> The art of tapping and preserving Padhaneer is a heritage skill passed down through generations. It showcases traditional knowledge, village craftsmanship, and the wisdom of working in harmony with nature.</li>
-        <li><strong>Cultural Hospitality:</strong> Offering Padhaneer to guests reflects warmth, respect and generosity in South Indian culture. It is a simple yet meaningful gesture of welcoming others with the pure, natural drink.</li>
-        <li><strong>Spiritual Symbolism:</strong> The freshness of Padhaneer represents purity, simplicity and divine connection. In traditional Ayurvedic belief, it helps balance the body’s heat and promotes wellness, linking culture with health.</li>
-      </ul>
-
-      <h4 style="color: #3C8C4D;">HERITAGE IMPORTANCE</h4>
-      <ul style="line-height: 1.6;">
-        <li><strong>Traditional Skill Preservation:</strong> The methods of collecting and storing Padhaneer are ancient heritage practices, demonstrating the wisdom and eco-awareness of South Indian rural communities.</li>
-        <li><strong>Historical Continuity:</strong> For centuries, Padhaneer has been part of daily life, symbolising continuity between the past and present and preserving an important aspect of Tamil and Dravidian heritage.</li>
-        <li><strong>Cultural Identity:</strong> Padhaneer stands as a symbol of South Indian identity, promoting natural living, respect for tradition and pride in local culture.</li>
-        <li><strong>Modern Revival:</strong> In recent years, government and cooperative initiatives have encouraged the revival of Padhaneer as a healthy, traditional beverage, ensuring that this heritage drink continues to thrive in modern times.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+  <div id="site-footer"></div>
+  
+</body>
+</html>

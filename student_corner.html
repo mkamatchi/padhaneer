@@ -1,51 +1,604 @@
-<section style="padding: 20px; max-width: 1000px; margin: auto;">
-  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
-    <!-- Text Content -->
-    <div style="flex: 1 1 100%;">
-      <h2 style="color: #3C8C4D;">Student Corner</h2>
-      <p>Explore student creativity, activities, and moments captured through this vibrant gallery.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Corner - PadhaNeer Connect</title>
+  <link rel="icon" type="image/png" href="images/palm_tree.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Critical navbar CSS to avoid flicker before JS loads -->
+  <style id="critical-nav">
+    .navbar{position:fixed;top:0;left:0;right:0;height:80px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);z-index:1000}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:40px}
+  </style>
+  <script src="site-chrome.js" defer></script>
+  <style>
+    :root {
+      --primary-green: #2D5A3D;
+      --secondary-green: #4A7C59;
+      --accent-green: #6B9B7F;
+      --light-green: #E8F5E8;
+      --warm-beige: #F7F3E9;
+      --golden: #D4AF37;
+      --text-dark: #2C3E50;
+      --text-light: #6C7B7F;
+      --white: #FFFFFF;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: white;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="student" patternUnits="userSpaceOnUse" width="40" height="40"><path d="M20 5 L25 15 L20 25 L15 15 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23student)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-bottom: 1.25rem;
+    }
+
+    .content-section {
+      padding: 3rem 2rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      text-align: center;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary-green);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--golden);
+      border-radius: 2px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px var(--shadow);
+      transition: all 0.3s ease;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(45, 90, 61, 0.8), rgba(74, 124, 89, 0.8));
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay i {
+      font-size: 3rem;
+      color: white;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: white;
+      padding: 2rem 1rem 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+
+    .caption-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .caption-description {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .stats-section {
+      background: var(--light-green);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-green);
+      display: block;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+
+    .lightbox img {
+      display: block;
+      max-width: 90vw;
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close:hover {
+      color: var(--golden);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .hero-section { padding: 1.25rem 1rem; }
+      .hero-section h1 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+      .hero-section .subtitle { font-size: 0.95rem; margin-bottom: 1rem; }
+
+      .content-section {
+        padding: 2rem 1rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Student Corner</h1>
+        <p class="subtitle">Creativity, Innovation & Learning in Action</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-section">
+      <p class="intro-text">
+        Explore the vibrant world of student creativity, activities, and memorable moments captured through this inspiring gallery. 
+        Witness the passion and dedication of young minds working together to preserve cultural heritage.
+      </p>
+
+      <!-- Statistics Section 
+      <div class="stats-section">
+        <h2 class="section-title">Project Highlights</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon"><i class="fas fa-camera"></i></div>
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Creative Moments</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <span class="stat-number">5</span>
+            <span class="stat-label">Student Contributors</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"><i class="fas fa-lightbulb"></i></div>
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Innovation Spirit</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon"><i class="fas fa-heart"></i></div>
+            <span class="stat-number">∞</span>
+            <span class="stat-label">Passion & Dedication</span>
+          </div>
+        </div>
+      </div>-->
+
+      <!-- Gallery Section -->
+      <h2 class="section-title">Student Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset1.jpg')">
+          <img src="images/student_corner/asset1.jpg" alt="Student Activity 1">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!-- <div class="gallery-caption">
+            <div class="caption-title">Creative Workshop</div>
+            <div class="caption-description">Students brainstorming and developing ideas</div>
+          </div> -->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset2.jpg')">
+          <img src="images/student_corner/asset2.jpg" alt="Student Activity 2">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Research Phase</div>
+            <div class="caption-description">Gathering information and cultural insights</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset3.jpg')">
+          <img src="images/student_corner/asset3.jpg" alt="Student Activity 3">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Team Collaboration</div>
+            <div class="caption-description">Working together towards a common goal</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset4.jpg')">
+          <img src="images/student_corner/asset4.jpg" alt="Student Activity 4">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Design Process</div>
+            <div class="caption-description">Creating visual elements and layouts</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset5.jpg')">
+          <img src="images/student_corner/asset5.jpg" alt="Student Activity 5">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Content Creation</div>
+            <div class="caption-description">Developing educational materials</div>
+          </div>  -->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset6.jpg')">
+          <img src="images/student_corner/asset6.jpg" alt="Student Activity 6">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Field Research</div>
+            <div class="caption-description">Learning from real-world experiences</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset7.jpg')">
+          <img src="images/student_corner/asset7.jpg" alt="Student Activity 7">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Technology Integration</div>
+            <div class="caption-description">Using modern tools for ancient wisdom</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset8.jpg')">
+          <img src="images/student_corner/asset8.jpg" alt="Student Activity 8">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Presentation Prep</div>
+            <div class="caption-description">Preparing to share their findings</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset9.jpg')">
+          <img src="images/student_corner/asset9.jpg" alt="Student Activity 9">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Final Review</div>
+            <div class="caption-description">Polishing the project details</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset10.jpg')">
+          <img src="images/student_corner/asset10.jpg" alt="Student Activity 10">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Achievement Celebration</div>
+            <div class="caption-description">Celebrating the successful completion</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset11.jpg')">
+          <img src="images/student_corner/asset11.jpg" alt="Student Activity 10">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Achievement Celebration</div>
+            <div class="caption-description">Celebrating the successful completion</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset12.jpg')">
+          <img src="images/student_corner/asset12.jpg" alt="Student Activity 10">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Achievement Celebration</div>
+            <div class="caption-description">Celebrating the successful completion</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset13.jpg')">
+          <img src="images/student_corner/asset13.jpg" alt="Student Activity 10">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+          <!--<div class="gallery-caption">
+            <div class="caption-title">Achievement Celebration</div>
+            <div class="caption-description">Celebrating the successful completion</div>
+          </div>-->
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset14.jpg')">
+          <img src="images/student_corner/asset14.jpg" alt="Student Activity 14">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset15.jpg')">
+          <img src="images/student_corner/asset15.jpg" alt="Student Activity 15">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset16.jpg')">
+          <img src="images/student_corner/asset16.jpg" alt="Student Activity 16">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox('images/student_corner/asset17.jpg')">
+          <img src="images/student_corner/asset17.jpg" alt="Student Activity 17">
+          <div class="gallery-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <!-- Image Gallery -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 20px;">
-    <!-- Repeat this block for each image -->
-    <a href="images/student_corner/asset1.jpg" target="_blank">
-      <img src="images/student_corner/asset1.jpg" alt="Asset Image 1" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset2.jpg" target="_blank">
-      <img src="images/student_corner/asset2.jpg" alt="Asset Image 2" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset3.jpg" target="_blank">
-      <img src="images/student_corner/asset3.jpg" alt="Asset Image 3" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset4.jpg" target="_blank">
-      <img src="images/student_corner/asset4.jpg" alt="Asset Image 4" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset5.jpg" target="_blank">
-      <img src="images/student_corner/asset5.jpg" alt="Asset Image 5" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset6.jpg" target="_blank">
-      <img src="images/student_corner/asset6.jpg" alt="Asset Image 6" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset7.jpg" target="_blank">
-      <img src="images/student_corner/asset7.jpg" alt="Asset Image 7" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset8.jpg" target="_blank">
-      <img src="images/student_corner/asset8.jpg" alt="Asset Image 8" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset9.jpg" target="_blank">
-      <img src="images/student_corner/asset9.jpg" alt="Asset Image 9" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-    <a href="images/student_corner/asset10.jpg" target="_blank">
-      <img src="images/student_corner/asset10.jpg" alt="Asset Image 10" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-	<a href="images/student_corner/asset11.jpg" target="_blank">
-      <img src="images/student_corner/asset11.jpg" alt="Asset Image 11" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
-	<a href="images/student_corner/asset12.jpg" target="_blank">
-      <img src="images/student_corner/asset12.jpg" alt="Asset Image 12" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
-    </a>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="">
+    </div>
   </div>
-</section>
+  <div id="site-footer"></div>
+  
+  <script>
+    function openLightbox(imageSrc) {
+      document.getElementById('lightbox').style.display = 'block';
+      document.getElementById('lightbox-img').src = imageSrc;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
 

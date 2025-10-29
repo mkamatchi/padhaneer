@@ -1,80 +1,168 @@
-<section style="padding: 20px; max-width: 1000px; margin: auto;">
-  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
-    <!-- Text Content -->
-    <div style="flex: 1 1 100%;">
-      <h2 style="color: #3C8C4D;">Palm Products</h2>
-      <p>Explore the diverse range of products made from Palmyra trees — from traditional foods to eco-friendly crafts.</p>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palm Products - PadhaNeer Connect</title>
+  <link rel="icon" type="image/png" href="images/palm_tree.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Critical navbar CSS to avoid flicker before JS loads -->
+  <style id="critical-nav">
+    .navbar{position:fixed;top:0;left:0;right:0;height:80px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);z-index:1000}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:40px}
+  </style>
+  <script src="site-chrome.js" defer></script>
+  <style>
+    :root{ --primary-green:#2D5A3D; --secondary-green:#4A7C59; --accent-green:#6B9B7F; --light-green:#E8F5E8; --warm-beige:#F7F3E9; --golden:#D4AF37; --text-dark:#2C3E50; --text-light:#6C7B7F; --white:#FFFFFF; --shadow:rgba(0,0,0,0.1); }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:'Inter',sans-serif; background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%); color: var(--text-dark); line-height:1.6; padding: 2rem; }
+    .container{ max-width:1200px; margin:0 auto; background:#fff; border-radius:20px; box-shadow:0 10px 30px var(--shadow); overflow:hidden; }
+    .hero{ background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); color:#fff; padding:2rem 1.5rem; text-align:center; position:relative; overflow:hidden; }
+    .hero::before{ content:''; position:absolute; inset:0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="prod" patternUnits="userSpaceOnUse" width="50" height="50"><rect x="22" y="22" width="6" height="6" fill="rgba(255,255,255,0.12)"/></pattern></defs><rect width="100" height="100" fill="url(%23prod)"/></svg>'); opacity:.3 }
+    .hero h1{ position:relative; z-index:1; font-family:'Playfair Display',serif; font-size: clamp(1.8rem, 3.2vw, 2.4rem); margin-bottom:.5rem }
+    .hero p{ position:relative; z-index:1; opacity:.95; font-size:1.05rem }
+    .content{ padding:2rem }
+    .overview{ text-align:center; margin-bottom:1.5rem }
+    .overview img{ max-width:100%; height:auto; border-radius:16px; box-shadow:0 10px 20px var(--shadow) }
+    .overview small{ display:block; margin-top:.5rem; color: var(--text-light); font-style: italic }
+    .grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:20px; }
+    .item{ text-align:center; background:#fff; border-radius:12px; padding:12px; box-shadow:0 5px 15px var(--shadow) }
+    .item img{ width:140px; height:140px; object-fit:contain; border-radius:10px }
+    .item p{ margin-top:8px; font-weight:600 }
+    @media(max-width:768px){ body{ padding:1rem } .hero{ padding:1.25rem 1rem } .hero h1{ font-size:1.6rem; margin-bottom:.6rem } .hero p{ font-size:.95rem } .item img{ width:120px; height:120px } }
+  </style>
+</head>
+<body>
+  <div id="site-header"><div class="navbar"><div class="nav-container"><a class="logo"><img src="images/logo.jpg" alt="Logo"></a><ul class="nav-menu"></ul></div></div></div>
+  <div class="container">
+    <section class="hero">
+      <h1>Palm Products</h1>
+      <p>Explore traditional foods and eco-friendly crafts made from Palmyra.</p>
+    </section>
+    <section class="content">
+      <div class="overview">
+        <img src="images/products/palm_products_overview.jpeg" alt="Palm Products Overview">
+        <small>A visual summary of palm-based items</small>
+      </div>
+      <div class="grid">
+        <div class="item"><img src="images/products/palm_product_01.jpg" alt="Nungu Ice apple"><p>Nungu (Ice Apple)</p></div>
+        <div class="item"><img src="images/products/palm_product_02.jpg" alt="Palm Candy (Panakarkandu)"><p>Palm Candy</p></div>
+        <div class="item"><img src="images/products/palm_product_03.jpg" alt="Palm Jaggery"><p>Palm Jaggery</p></div>
+        <div class="item"><img src="images/products/palm_product_04.jpg" alt="Palm baskets"><p>Palm Baskets</p></div>
+        <div class="item"><img src="images/products/palm_product_05.jpg" alt="Palm Craft"><p>Palm Craft</p></div>
+        <div class="item"><img src="images/products/palm_product_06.jpg" alt="Palm leaf hat"><p>Palm Leaf Hat</p></div>
+        <div class="item"><img src="images/products/palm_product_07.jpg" alt="Palm leaf Muram"><p>Palm Leaf Muram</p></div>
+        <div class="item"><img src="images/products/palm_product_08.jpg" alt="Palm leaf plates"><p>Palm Leaf Plates</p></div>
+        <div class="item"><img src="images/products/palm_product_09.jpg" alt="Palm leaf spice box"><p>Spice Box</p></div>
+        <div class="item"><img src="images/products/palm_product_10.jpg" alt="Palm Leaf basket"><p>Leaf Basket</p></div>
+        <div class="item"><img src="images/products/palm_product_11.jpg" alt="Palm Leaf Thatching roof"><p>Thatching Roof</p></div>
+        <div class="item"><img src="images/products/palm_product_12.jpg" alt="Palm mini basket"><p>Mini Basket</p></div>
+        <div class="item"><img src="images/products/palm_product_13.jpg" alt="Pana Kilangu - Palmyra sprout"><p>Palmyra Sprout</p></div>
+        <div class="item"><img src="images/products/palm_product_14.jpg" alt="Palm Wood furniture"><p>Wood Furniture</p></div>
+      </div>
 
-	<!-- Overall Products Image -->
-	<div style="margin-top: 40px; text-align: center;">
-	  <h3 style="color: #3C8C4D;">All Palm Products at a Glance</h3>
-	  <img src="images/products/palm_products_overview.jpeg" alt="Palm Products Overview" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-	  <p style="margin-top: 10px; font-style: italic;">A visual summary of all palm-based items</p>
-	</div>
-	<br>
-	<br>
-
-	<!-- Image Grid -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px;">
-    <!-- Repeat this block for each product -->
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_01.jpg" alt="Nungu Ice apple" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Nungu Ice apple</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_02.jpg" alt="Palm Candy(Panakarkandu)" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm Candy(Panakarkandu)</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_03.jpg" alt="Palm Jaggery" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm Jaggery</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_04.jpg" alt="Palm baskets" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm baskets</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_05.jpg" alt="Palm Craft" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm Craft</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_06.jpg" alt="Palm leaf hat" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm leaf hat</p>
-    </div><div style="text-align: center;">
-      <img src="images/products/palm_product_07.jpg" alt="Palm leaf Muram" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm leaf Muram</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_08.jpg" alt="Palm leaf plates" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm leaf plates</p>
-    </div>
-    <div style="text-align: center;">
-      <img src="images/products/palm_product_09.jpg" alt="Palm leaf spice box" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm leaf spice box</p>
-    </div>
-	 <div style="text-align: center;">
-      <img src="images/products/palm_product_10.jpg" alt="Palm Leaf basket" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm Leaf basket</p>
-    </div>
-	 <div style="text-align: center;">
-      <img src="images/products/palm_product_11.jpg" alt="Palm Leaf Thatching roof" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm Leaf Thatching roof</p>
-    </div>
-	<div style="text-align: center;">
-      <img src="images/products/palm_product_12.jpg" alt="Palm mini basket" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm mini basket</p>
-    </div>
-	 <div style="text-align: center;">
-      <img src="images/products/palm_product_13.jpg" alt="Pana Kilangu-Palmyra sprout" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Pana Kilangu-Palmyra sprout</p>
-    </div>
-	<div style="text-align: center;">
-      <img src="images/products/palm_product_14.jpg" alt="Palm Wood furniture" style="width: 150px; height: 150px; object-fit: contain; border-radius: 8px;">
-      <p style="margin-top: 8px; font-weight: bold;">Palm Wood furniture</p>
-    </div>
+<div style="margin-top: 3rem;">
+  <h2 style="text-align:center; margin-bottom:1rem;">Palm Product Details</h2>
+  <style>
+    .palm-products-table tbody tr:nth-child(odd){ background:#ffffff; }
+    .palm-products-table tbody tr:nth-child(even){ background:#F7FBF8; }
+    .palm-products-table tbody tr:hover{ background:#E8F5E8; }
+    .table-responsive{ width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  </style>
+  <div class="table-responsive">
+  <table class="palm-products-table" style="width:100%; min-width:980px; border-collapse:collapse; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+    <thead style="background-color:#E8F5E8; color:#2C3E50;">
+      <tr>
+        <th style="padding:12px; border:1px solid #ccc;">Image</th>
+        <th style="padding:12px; border:1px solid #ccc;">Palm Product</th>
+        <th style="padding:12px; border:1px solid #ccc;">Source (Part of Tree)</th>
+        <th style="padding:12px; border:1px solid #ccc;">Making Process (Step-by-Step)</th>
+        <th style="padding:12px; border:1px solid #ccc;">Uses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="images/products/palm_product_row_01.jpg" alt="Neera" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Neera (Palm Juice)</td>
+        <td>Flower sap</td>
+        <td>1. Tap unopened palm flower.<br>2. Collect sweet sap (Neera) in pots.<br>3. Filter and chill immediately.</td>
+        <td>Refreshing natural drink, rich in nutrients.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_02.jpg" alt="Palm Jaggery" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Jaggery (Karuppatti)</td>
+        <td>Neera (sap)</td>
+        <td>1. Boil Neera in large pans.<br>2. Stir until thick and sticky.<br>3. Pour into moulds and cool.</td>
+        <td>Natural sweetener, used in sweets & drinks.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_03.jpg" alt="Palm Sugar" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Sugar</td>
+        <td>Neera (sap)</td>
+        <td>1. Boil and stir sap till thick.<br>2. Dry the thick syrup.<br>3. Crush or powder into sugar.</td>
+        <td>Used in desserts, tea, coffee, etc.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_04.jpg" alt="Palm Oil" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Oil</td>
+        <td>Fruit pulp (oil palm)</td>
+        <td>1. Harvest ripe fruits.<br>2. Steam and press fruits.<br>3. Separate oil and refine.</td>
+        <td>Cooking, cosmetics, soaps, and biodiesel.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_05.jpg" alt="Palm Leaf Products" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Leaf Products</td>
+        <td>Leaves</td>
+        <td>1. Cut and dry leaves.<br>2. Weave or fold into mats, baskets, fans, plates.</td>
+        <td>Eco-friendly household and decorative items.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_06.jpg" alt="Palm Fibre" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Fibre (Coir)</td>
+        <td>Trunk or leaf base</td>
+        <td>1. Extract fibres.<br>2. Clean and dry.<br>3. Spin into ropes or mats.</td>
+        <td>Brushes, ropes, mats, handicrafts.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_07.jpg" alt="Palm Wine" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Wine (Toddy)</td>
+        <td>Fermented sap</td>
+        <td>1. Collect Neera and allow to ferment naturally for 6–8 hours.<br>2. Filter and store in clay pots.</td>
+        <td>Traditional alcoholic drink (local use).</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_08.jpg" alt="Palm Vinegar" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Vinegar</td>
+        <td>Fermented Neera</td>
+        <td>1. Allow fermented Neera to age longer.<br>2. Filter and bottle.</td>
+        <td>Used in cooking and pickles.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_09.jpg" alt="Palm Seed Craft Items" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Seed Craft Items</td>
+        <td>Palm seeds</td>
+        <td>1. Collect dried seeds.<br>2. Carve, polish, or paint for crafts/jewellery.</td>
+        <td>Handicrafts, souvenirs.</td>
+      </tr>
+      <tr>
+        <td><img src="images/products/palm_product_row_10.jpg" alt="Palm Wood Products" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
+        <td>Palm Wood Products</td>
+        <td>Trunk</td>
+        <td>1. Cut matured trunks<br>2. Dry and saw into planks.<br>3. Polish and shape.</td>
+        <td>Furniture, flooring, construction.</td>
+      </tr>
+    </tbody>
+  </table>
   </div>
+</div>
+
+
+      
+    </section>
+  </div>
+  <div id="site-footer"></div>
   
-
-</section>
+</body>
+</html>

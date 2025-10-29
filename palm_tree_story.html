@@ -1,39 +1,535 @@
-<section style="padding: 20px; max-width: 1000px; margin: auto;">
-  <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px;">
-    
-    <!-- Combined Text Content -->
-    <div style="flex: 1 1 50%;">
-      <h2 style="color: #3C8C4D;">Palm Tree Story</h2>
-      <p>Explore the journey of the palm tree through culture, tradition, and nature’s wisdom. From ancient roots to modern relevance, this comic brings the story to life for all ages.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palm Tree Story - PadhaNeer Connect</title>
+  <link rel="icon" type="image/png" href="images/palm_tree.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Critical navbar CSS to avoid flicker before JS loads -->
+  <style id="critical-nav">
+    .navbar{position:fixed;top:0;left:0;right:0;height:80px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);z-index:1000}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:40px}
+  </style>
+  <script src="site-chrome.js" defer></script>
+  <style>
+    :root {
+      --primary-green: #2D5A3D;
+      --secondary-green: #4A7C59;
+      --accent-green: #6B9B7F;
+      --light-green: #E8F5E8;
+      --warm-beige: #F7F3E9;
+      --golden: #D4AF37;
+      --text-dark: #2C3E50;
+      --text-light: #6C7B7F;
+      --white: #FFFFFF;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
 
-      <p>All parts of the palm tree are useful to mankind — leaves, fruits, stem, petiole, and inflorescence. Nothing goes to waste. Our ancestors honored it as the world’s “Karpaga Virutcham.”</p>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      <p>Native to the Indian subcontinent, the palm tree has played an economic, religious, medicinal, and environmental role in ancient Tamil Nadu. Recognizing its importance, the Government of Tamil Nadu declared it the state tree in 1978.</p>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
 
-      <p>Mahatma Gandhi referred to the palmyra tree as “An Antidote for poverty,” acknowledging its value in rural tropical India.</p>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      overflow: hidden;
+    }
 
-      <h4 style="color: #8B6B3E;">🌿 Wonders of the Palm Tree</h4>
-      <ul style="line-height: 1.6; padding-left: 20px;">
-        <li>Drought-tolerant and thrives in dry lands by retaining water.</li>
-        <li>One of the fastest-growing, renewable resources.</li>
-        <li>Self-sustaining — often grows without cultivation.</li>
-        <li>Life span ranges from 100 to 150 years, producing fronds and fruits continuously without watering.</li>
-        <li>Comprises 34 species, with distinct male and female trees.</li>
-        <li>Male trees bear lacquer-colored flowers; female trees produce edible roots and pulpy kernels.</li>
-        <li>Wood is extremely hard when cured — stronger than oak — used for flooring and siding.</li>
-        <li>Leaves are sturdy and large, ideal for roofing, baskets, mats, hats, fans, umbrellas, and fencing.</li>
-        <li>Historically, dried leaves were used for manuscript writing.</li>
-        <li>Palmyra supports livelihood through food, beverage, fibre, fodder, medicine, and timber.</li>
-        <li>Sweet sap from inflorescence is used to make palm sugar.</li>
-      </ul>
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: white;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-      <p><strong>Where it grows:</strong> Tamil Nadu, Andhra Pradesh, Maharashtra, Gujarat, West Bengal.Out of total 10 crores palm trees in India, 6 crores trees are in Tamilnadu.</p>
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tree" patternUnits="userSpaceOnUse" width="60" height="60"><path d="M30 10 Q20 20 30 30 Q40 20 30 10 M30 30 L30 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></pattern></defs><rect width="100" height="100" fill="url(%23tree)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-bottom: 1.25rem;
+    }
+
+    .content-section {
+      padding: 3rem 2rem;
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+
+    .story-content {
+      padding: 2rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .quote-section {
+      background: var(--light-green);
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 2rem 0;
+      border-left: 4px solid var(--primary-green);
+    }
+
+    .quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--primary-green);
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote-author {
+      color: var(--text-light);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .comic-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .comic-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .comic-image:hover {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary-green);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--golden);
+      border-radius: 2px;
+    }
+
+    .wonders-section {
+      background: var(--light-green);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+    }
+
+    .wonders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .wonder-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px var(--shadow);
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--primary-green);
+    }
+
+    .wonder-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .wonder-icon {
+      font-size: 2rem;
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+    }
+
+    .wonder-card h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .wonder-card p {
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--golden);
+      display: block;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .location-section {
+      background: var(--warm-beige);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .location-section h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-green);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .location-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    /* Location table theme */
+    .flourish-title{font-family:'Playfair Display',serif;color:var(--primary-green);font-size:2rem;margin-bottom:.5rem}
+    .flourish-subtitle{color:var(--text-light);margin-bottom:1.25rem}
+    .location-table-wrap{overflow:auto}
+    .location-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid rgba(45,90,61,0.18);border-radius:14px;box-shadow:0 8px 18px var(--shadow);text-align:left}
+    .location-table thead th{position:sticky;top:0;background:linear-gradient(135deg, var(--primary-green), var(--secondary-green));color:#fff;padding:14px;font-weight:600}
+    .location-table tbody td{padding:14px;color:var(--text-dark)}
+    .location-table thead th:first-child{border-top-left-radius:14px}
+    .location-table thead th:last-child{border-top-right-radius:14px}
+    .location-table tbody tr:last-child td:first-child{border-bottom-left-radius:14px}
+    .location-table tbody tr:last-child td:last-child{border-bottom-right-radius:14px}
+    .location-table tbody tr:nth-child(odd){background:#ffffff}
+    .location-table tbody tr:nth-child(even){background:rgba(45,90,61,0.07)}
+    .location-table tbody tr td{border-top:1px solid rgba(45,90,61,0.08)}
+    .location-table tbody tr:hover{background:var(--light-green)}
+    @media(max-width:768px){.location-table thead th,.location-table tbody td{padding:10px;font-size:.95rem}}
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .hero-section {
+        padding: 1.25rem 1rem;
+      }
+
+      .hero-section h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .hero-section .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .story-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .content-section {
+        padding: 2rem 1rem;
+      }
+
+      .wonders-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }    
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>The Palm Tree Story</h1>
+        <p class="subtitle">Journey Through Culture, Tradition & Nature's Wisdom</p>
+      </div>
     </div>
 
-    <!-- Comic Image -->
-    <div style="flex: 1 1 45%;"><br><br><br>
-      <img src="images/palm_story_comic.jpg" alt="Palm Tree Comic" style="width: 100%; height: auto; border-radius: 12px;">
-    </div>
+    <!-- Main Content -->
+    <div class="content-section">
+      <!-- Story Layout -->
+      <div class="story-layout">
+        <div class="story-content">
+          <p class="intro-text">
+            Explore the journey of the palm tree through culture, tradition, and nature's wisdom. From ancient roots to modern relevance, this story brings the legacy to life for all ages.
+          </p>
+          
+          <p class="intro-text">
+            All parts of the palm tree are useful to mankind — leaves, fruits, stem, petiole, and inflorescence. Nothing goes to waste. Our ancestors honored it as the world's <b>"Karpaga Virutcham."</b>
+          </p>
 
+          <p class="intro-text">
+            Native to the Indian subcontinent, the palm tree has played an economic, religious, medicinal, and environmental role in ancient Tamil Nadu. Recognizing its importance, the Government of Tamil Nadu declared it the state tree in 1978.
+          </p>
+
+          <div class="quote-section">
+            <p class="quote">"An Antidote for poverty"</p>
+            <p class="quote-author">- Mahatma Gandhi on the Palmyra Tree</p>
+          </div>
+        </div>
+
+        <div class="comic-section">
+          <img src="images/palm_story_comic.jpg" alt="Palm Tree Comic Story" class="comic-image">
+        </div>
+      </div>
+
+      <!-- Statistics Section -->
+      <div class="stats-section">
+        <h2 style="color: var(--golden); font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Palm Tree Facts</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number">100-150</span>
+            <span class="stat-label">Years Lifespan</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">34</span>
+            <span class="stat-label">Species Worldwide</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">10 Cr</span>
+            <span class="stat-label">Trees in India</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">6 Cr</span>
+            <span class="stat-label">Trees in Tamil Nadu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wonders Section -->
+      <div class="wonders-section">
+        <h2 class="section-title">🌿 Wonders of the Palm Tree</h2>
+        <div class="wonders-grid">
+          <div class="wonder-card">
+            <div class="wonder-icon"><i class="fas fa-seedling"></i></div>
+            <h4>Drought Tolerant</h4>
+            <p>Thrives in dry lands by retaining water and grows without cultivation.</p>
+          </div>
+          <div class="wonder-card">
+            <div class="wonder-icon"><i class="fas fa-recycle"></i></div>
+            <h4>Renewable Resource</h4>
+            <p>One of the fastest-growing, renewable resources with continuous production.</p>
+          </div>
+          <div class="wonder-card">
+            <div class="wonder-icon"><i class="fas fa-tree"></i></div>
+            <h4>Long Lifespan</h4>
+            <p>Lives 100-150 years, producing fronds and fruits continuously without watering.</p>
+          </div>
+          <div class="wonder-card">
+            <div class="wonder-icon"><i class="fas fa-hammer"></i></div>
+            <h4>Strong Wood</h4>
+            <p>Wood is extremely hard when cured — stronger than oak — used for construction.</p>
+          </div>
+          <div class="wonder-card">
+            <div class="wonder-icon"><i class="fas fa-leaf"></i></div>
+            <h4>Versatile Leaves</h4>
+            <p>Sturdy leaves ideal for roofing, baskets, mats, hats, fans, and traditional manuscripts.</p>
+          </div>
+          <div class="wonder-card">
+            <div class="wonder-icon"><i class="fas fa-heart"></i></div>
+            <h4>Complete Utility</h4>
+            <p>Supports livelihood through food, beverage, fiber, fodder, medicine, and timber.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location Section -->
+      <div class="location-section">
+        <h3><i class="fas fa-map-marker-alt"></i> PAN INDIA FOOTPRINTS OF PALM</h3>
+        <h4 class="flourish-title"><i>From Coastlines to Heartlands</i><h4>
+        <p class="flourish-subtitle">A quick tour of traditional palm sap names and uses across India</p>
+        <div class="location-table-wrap">
+          <table class="location-table">
+            <thead>
+              <tr>
+                <th>State</th>
+                <th>Tree Source</th>
+                <th>Local Name</th>
+                <th>Famous Uses / Products</th>
+                <th>Cultural or Traditional Importance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tamil Nadu</td>
+                <td>Palmyra palm, Coconut palm</td>
+                <td>Padhaneer (பதநீர்)</td>
+                <td>Natural drink, Jaggery (karuppatti), Vinegar</td>
+                <td>Offered in temples, traditional summer drink</td>
+              </tr>
+              <tr>
+                <td>Kerala</td>
+                <td>Coconut palm</td>
+                <td>Neera</td>
+                <td>Health drink, Sugar, Jaggery, Vinegar</td>
+                <td>Government promotes it as a non-alcoholic energy drink</td>
+              </tr>
+              <tr>
+                <td>Andhra Pradesh</td>
+                <td>Palmyra palm, Coconut palm</td>
+                <td>Thaati Kallu</td>
+                <td>Fermented drink, Jaggery</td>
+                <td>Collected early morning; famous coastal drink</td>
+              </tr>
+              <tr>
+                <td>Telangana</td>
+                <td>Palmyra palm, Date palm</td>
+                <td>Itthi Kallu / Thaati Kallu</td>
+                <td>Fresh drink, Jaggery</td>
+                <td>Common roadside refreshment</td>
+              </tr>
+              <tr>
+                <td>Karnataka</td>
+                <td>Coconut palm</td>
+                <td>Neera</td>
+                <td>Soft drink, Sugar, Jaggery</td>
+                <td>Recognized officially as a health drink</td>
+              </tr>
+              <tr>
+                <td>Goa</td>
+                <td>Coconut palm</td>
+                <td>Neero</td>
+                <td>Morning refreshment drink</td>
+                <td>Consumed before fermentation, part of Goan culture</td>
+              </tr>
+              <tr>
+                <td>Maharashtra</td>
+                <td>Coconut & Date palm</td>
+                <td>Neera</td>
+                <td>Syrup, Sugar, Jaggery</td>
+                <td>Promoted by Maharashtra Neera Development Board</td>
+              </tr>
+              <tr>
+                <td>Gujarat</td>
+                <td>Date palm</td>
+                <td>Neera / Tari</td>
+                <td>Drink, Vinegar</td>
+                <td>Popular during summer season</td>
+              </tr>
+              <tr>
+                <td>Odisha</td>
+                <td>Palmyra & Date palm</td>
+                <td>Pana / Neera</td>
+                <td>Drink, Jaggery</td>
+                <td>Consumed during Pana Sankranti festival</td>
+              </tr>
+              <tr>
+                <td>West Bengal</td>
+                <td>Date palm</td>
+                <td>Khejurer Ras</td>
+                <td>Sweet sap, Nolen Gur sweets</td>
+                <td>Famous winter delicacy in Bengal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+  <div id="site-footer"></div>
+  
+</body>
+</html>

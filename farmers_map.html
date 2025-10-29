@@ -1,128 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PadhaNeer Connect – Farmers Map</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PadhaNeer Connect – Palm Guardians</title>
+  <link rel="icon" type="image/png" href="images/palm_tree.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Leaflet + MarkerCluster CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
 
-<!-- Leaflet + MarkerCluster CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-
-<style>
-  body {
-    margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fffaf0;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-
-  header {
-    background-color: #3c8c4d;
-    color: white;
-    text-align: center;
-    padding: 15px;
-  }
-  
-  .header-links {
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	  margin: 20px 0;
-	}
-
-	.header-link {
-	  color: #white;
-	  text-decoration: none;
-	  font-weight: bold;
-	  font-size: 16px;
-	}
-	.header-link:visited,
-	.header-link:hover,
-	.header-link:active {
-	  color: white;
-	}
-
-
-  #controls {
-    background: #f0f7f3;
-    padding: 10px;
-    text-align: center;
-  }
-
-  #map {
-    flex: 1;
-  }
-
-  select {
-    margin: 5px;
-    padding: 5px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1px solid #4caf50;
-    background: #e8f5e9;
-  }
-
-  .leaflet-popup-content img {
-    width: 100px;
-    border-radius: 8px;
-    margin-top: 5px;
-  }
-
-  /* Legend styles */
-  .legend {
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .color-box {
-    width: 14px;
-    height: 14px;
-    border-radius: 3px;
-  }
-
-  @media (max-width: 768px) {
-    select {
-      width: 90%;
-      margin-bottom: 10px;
-    }
-  }
-</style>
+  <style>
+    :root{ --primary-green:#2D5A3D; --secondary-green:#4A7C59; --light-green:#E8F5E8; --warm-beige:#F7F3E9; --golden:#D4AF37; --text-dark:#2C3E50; --text-light:#6C7B7F; --shadow:rgba(0,0,0,0.1); }
+    body{ margin:0; font-family:'Inter',sans-serif; background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%); color: var(--text-dark); }
+    .container{ max-width:1200px; margin: 0 auto; background:#fff; border-radius:20px; box-shadow:0 10px 30px var(--shadow); overflow:hidden }
+    .hero{ background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); color:#fff; padding:2rem 1.5rem; text-align:center; position:relative }
+    .hero h1{ font-family:'Playfair Display',serif; font-size: clamp(1.8rem,3.2vw,2.4rem); margin:0 0 .5rem }
+    .hero p{ opacity:.95; margin:0; font-size:1.05rem }
+    .controls{ background: var(--light-green); padding: 1rem; text-align:center; border-bottom:1px solid rgba(0,0,0,0.06); display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; align-items:center }
+    .controls label{ font-weight:600; color: var(--text-dark) }
+    .controls select{ margin:.25rem; padding:.6rem .8rem; font-size:14px; border-radius:10px; border:1px solid rgba(44,62,80,0.2); background:#fff; min-width: 180px }
+    #map{ height: 70vh; }
+    .leaflet-popup-content img{ width:100px; border-radius:8px; margin-top:5px }
+    .legend{ background:#fff; padding:10px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2); font-size:13px; line-height:1.5 }
+    .legend-item{ display:flex; align-items:center; gap:6px }
+    .color-box{ width:14px; height:14px; border-radius:3px }
+    .controls .link-btn{ text-decoration:none; font-weight:600; color:#fff; background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); padding:.6rem .9rem; border-radius:999px; box-shadow:0 4px 12px rgba(45,90,61,.25) }
+    @media(max-width:768px){ #map{ height: 60vh } .controls{ padding:.75rem } .controls select{ min-width: 46% } .hero{ padding:1.25rem 1rem } .hero h1{ font-size:1.6rem } .hero p{ font-size:.95rem } }
+  </style>
+  <!-- Critical navbar CSS to avoid flicker before JS loads -->
+  <style id="critical-nav">
+    .navbar{position:fixed;top:0;left:0;right:0;height:80px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);z-index:1000}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:40px}
+  </style>
+  <script src="site-chrome.js" defer></script>
 </head>
 
 <body>
-  <header>
-	  <h1>PadhaNeer Connect – Palm Guardians Map</h1>
-	  <p>Explore farmers & palm enthusiasts 🌴</p>
-
-	  <div class="header-links">
-		<a href="farmers_list.html" style="color: white;" class="header-link">🌾 View All Guardians</a>
-		<a href="index.html" style="color: white;" class="header-link">⬅️ Back to Home</a>
-	  </div>
-	</header>
-
-  <div id="controls">
-    <label>District:</label>
-    <select id="districtFilter"><option value="all">All</option></select>
-    <label>Occupation:</label>
-    <select id="occupationFilter"><option value="all">All</option></select>
+  <div id="site-header"></div>
+  <div class="container">
+    <section class="hero">
+      <h1>Palm Guardians Map</h1>
+      <p>Explore farmers and palm enthusiasts across India</p>
+    </section>
+    <div class="controls">
+      <label>District:</label>
+      <select id="districtFilter"><option value="all">All</option></select>
+      <label>Occupation:</label>
+      <select id="occupationFilter"><option value="all">All</option></select>
+      <a href="farmers_list.html" class="link-btn" style="margin-left:12px;">🌾 View Directory</a>
+    </div>
+    <div id="map"></div>
   </div>
-
-  <div id="map"></div>
 
   <!-- Leaflet + MarkerCluster JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -232,5 +163,7 @@
     };
     legend.addTo(map);
   </script>
+  <div id="site-footer"></div>
+  
 </body>
 </html>

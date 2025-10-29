@@ -3,80 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farmers List - PadhaNeer Connect</title>
+  <title>Palm Guardians Directory - PadhaNeer Connect</title>
+  <link rel="icon" type="image/png" href="images/palm_tree.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Critical navbar CSS to avoid flicker before JS loads -->
+  <style id="critical-nav">
+    .navbar{position:fixed;top:0;left:0;right:0;height:80px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.06);z-index:1000}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .logo img{height:40px}
+  </style>
+  <script src="site-chrome.js" defer></script>
   <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background-color: #fffaf0;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #3C8C4D;
-      margin-bottom: 15px;
-    }
-    #searchBar {
-      display: block;
-      margin: 0 auto 20px;
-      padding: 10px;
-      width: 80%;
-      max-width: 400px;
-      border: 2px solid #3C8C4D;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: white;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: #3C8C4D;
-      color: white;
-    }
-    tr:hover {
-      background-color: #f2fdf2;
-    }
-    img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+    :root{ --primary-green:#2D5A3D; --secondary-green:#4A7C59; --light-green:#E8F5E8; --warm-beige:#F7F3E9; --golden:#D4AF37; --text-dark:#2C3E50; --text-light:#6C7B7F; --shadow:rgba(0,0,0,0.1); }
+    body{ margin:0; font-family:'Inter',sans-serif; background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%); color: var(--text-dark); }
+    .container{ max-width:1200px; margin:0 auto; background:#fff; border-radius:20px; box-shadow:0 10px 30px var(--shadow); overflow:hidden }
+    .hero{ background: linear-gradient(135deg, var(--primary-green), var(--secondary-green)); color:#fff; padding:2rem 1.5rem; text-align:center }
+    .hero h1{ font-family:'Playfair Display',serif; font-size: clamp(1.8rem,3.2vw,2.4rem); margin:0 0 .5rem }
+    .hero p{ margin:0; opacity:.95; font-size:1.05rem }
+    .content{ padding:2rem }
+    #searchBar{ display:block; margin: 0 auto 20px; padding:12px 16px; width: min(90%,420px); border:1px solid rgba(44,62,80,0.2); border-radius:10px; font-size:16px; outline:none; transition:border .2s ease, box-shadow .2s ease }
+    #searchBar:focus{ border-color: var(--primary-green); box-shadow:0 0 0 3px rgba(45,90,61,0.15) }
+    table{ width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 5px 15px var(--shadow) }
+    thead th{ background: var(--primary-green); color:#fff; padding:12px }
+    tbody td{ border-top:1px solid rgba(0,0,0,0.06); padding:12px; text-align:center }
+    tbody tr:hover{ background:#f7fbf8 }
+    img{ width:60px; height:60px; border-radius:50%; object-fit:cover }
+    .actions{ text-align:right; margin: 10px 0 20px }
+    .actions a{ color: var(--primary-green); text-decoration:none; font-weight:600 }
+    @media(max-width:768px){ .content{ padding:1rem } .hero{ padding:1.25rem 1rem } .hero h1{ font-size:1.6rem; margin-bottom:.6rem } .hero p{ font-size:.95rem } }
   </style>
 </head>
 <body>
-  <h1>🌴 PadhaNeer Connect – Palm Guardians Directory</h1>
-
-  <input type="text" id="searchBar" placeholder="Search by name, occupation, or district...">
-  <div style="text-align: right; margin-top: 30px;">
-  <a href="index.html" style="color: #3C8C4D; text-decoration: none; font-weight: bold;">
-    ⬅️ Back to Home
-  </a>
-</div>
-
-
-  <table id="farmersTable">
-    <thead>
-      <tr>
-        <th>Photo</th>
-        <th>Name</th>
-        <th>Occupation</th>
-        <th>District</th>
-        <th>State</th>
-        <th>Contact</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
-  </table>
-
+  <div id="site-header"></div>
+  <div class="container">
+    <section class="hero">
+      <h1>🌴 Palm Guardians Directory</h1>
+      <p>Search and explore guardians by name, occupation, or district</p>
+    </section>
+    <section class="content">
+      <input type="text" id="searchBar" placeholder="Search by name, occupation, or district...">
+      <div class="actions">
+        <a href="farmers_map.html">🗺️ View Map</a>
+      </div>
+      <table id="farmersTable">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Occupation</th>
+            <th>District</th>
+            <th>State</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </section>
+  </div>
+  <div id="site-footer"></div>
+  
   <script>
     const farmers = [
       {name:"Pandiyan", occupation:"Palm Climber/Tapper", district:"Villipuram", state:"TamilNadu", contact:"9500627289", lat:11.9394, lon:79.4924, img:"images/farmers/pandiyan.jpg"},
