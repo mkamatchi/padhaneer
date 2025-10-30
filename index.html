@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Google verification-->
+  <meta name="google-site-verification" content="tOZO6gjPhNjiCUnAcHNJXhzeJa21g8UV0HoBbrYjktY" />
+
   <title>PadhaNeer Connect - Nature's Pure Energy</title>
   <link rel="icon" type="image/png" href="images/palm_tree.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -524,6 +527,152 @@
       transform: scale(1.05);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     }
+
+    /* Story of Panaiyeri CTA */
+.story-cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%);
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 15px 30px var(--shadow);
+  margin-top: 2rem;
+}
+
+.story-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--primary-green);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.story-badge i {
+  color: var(--golden);
+}
+
+.story-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  color: var(--primary-green);
+  margin-bottom: 0.75rem;
+}
+
+.story-text p {
+  color: var(--text-light);
+  line-height: 1.8;
+  max-width: 48ch;
+  margin-bottom: 1.25rem;
+}
+
+.story-image {
+  position: relative;
+}
+
+.story-image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.story-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.9);
+  color: var(--primary-green);
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Mobile responsiveness for Story CTA */
+@media (max-width: 768px) {
+  /* Make sure the whole block is centered */
+  .story-cta {
+    display: flex;                /* switch to flex for cleaner centering */
+    flex-direction: column;
+    align-items: center;          /* center horizontally */
+    justify-content: center;
+    width: 100%;                  /* take full mobile width */
+    margin: 0 auto;               /* center within parent */
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .story-text {
+    max-width: 480px;
+    width: 100%;
+  }
+
+  .story-text h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .story-text p {
+    margin: 0 auto 1.25rem;
+  }
+
+  .story-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .story-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .story-tag {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+.link-story {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--primary-green);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+  position: relative;
+}
+
+.link-story i {
+  transition: transform 0.3s ease;
+}
+
+.link-story:hover {
+  color: var(--secondary-green);
+}
+
+.link-story:hover i {
+  transform: translateX(5px);
+}
+
+
   </style>
 </head>
 <body>
@@ -540,9 +689,30 @@
           100% organic, rich in essential vitamins and minerals, serving as a healthy alternative 
           to sugary soft drinks while supporting local communities.
         </p>
+        <!--<div class="hero-buttons">
+          <a href="#about" class="btn-primary">
+            <i class="fas fa-leaf"></i> Discover More
+          </a>
+          <a href="#story" class="btn-secondary">
+            <i class="fa-solid fa-book-open"></i> Read the Story
+          </a>
+        </div>-->
+
+        <!--<div class="hero-buttons">
+          <a href="#about" class="btn-primary">
+            <i class="fas fa-leaf"></i> Discover More
+          </a>
+          <a href="#story" class="link-story">
+            👨‍🌾 Meet the Makers <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>-->
+
         <div class="hero-buttons">
           <a href="#about" class="btn-primary">
             <i class="fas fa-leaf"></i> Discover More
+          </a>
+          <a href="#story" class="link-story">
+            ✨ From the Heart of Panaiyeri <i class="fa-solid fa-arrow-right-long"></i>
           </a>
         </div>
       </div>
@@ -645,28 +815,27 @@
       </div>
 
       <!-- Story of Panaiyeri CTA -->
-      <div style="position: relative; overflow: hidden; border-radius: 18px; background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%); padding: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; gap: 2rem; box-shadow: 0 15px 30px var(--shadow); margin-top: 2rem;">
-        <div>
-          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(212, 175, 55, 0.15); color: var(--primary-green); padding: 0.4rem 0.8rem; border-radius: 999px; font-weight: 600; margin-bottom: 0.75rem;">
-            <i class="fa-solid fa-star" style="color: var(--golden);"></i>
-            <span>Featured Story</span>
+     <!-- <div style="position: relative; overflow: hidden; border-radius: 18px; background: linear-gradient(135deg, var(--warm-beige) 0%, var(--light-green) 100%); padding: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: center; gap: 2rem; box-shadow: 0 15px 30px var(--shadow); margin-top: 2rem;">-->
+        <!-- Story of Panaiyeri CTA -->
+        <div id="story" class="story-cta">
+          <div class="story-text">
+            <div class="story-badge">
+              <i class="fa-solid fa-star"></i><span>Featured Story</span>
+            </div>
+            <h2>The Story of Panaiyeri</h2>
+            <p>
+              Journey into the heart of the palmyra landscape. Meet the people, traditions, and timeless craft behind nature’s sweetest sip.
+            </p>
+            <a href="story_of_pannaiyeri.html" class="btn-primary">
+              <i class="fa-solid fa-book-open"></i> Read the Story
+            </a>
           </div>
-          <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 2.2vw, 2.2rem); color: var(--primary-green); margin-bottom: 0.75rem;">The Story of Panaiyeri</h2>
-          <p style="color: var(--text-light); line-height: 1.8; max-width: 48ch; margin-bottom: 1.25rem;">Journey into the heart of the palmyra landscape. Meet the people, traditions, and timeless craft behind nature’s sweetest sip.</p>
-          <a href="story_of_pannaiyeri.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-book-open"></i>
-            Read the Story
-          </a>
-        </div>
-        <div style="position: relative;">
-          <img src="images/Panaiyeri/pandian_family.png" alt="Palmyra Landscape" style="width: 100%; height: 260px; object-fit: cover; border-radius: 14px; box-shadow: 0 12px 24px rgba(0,0,0,0.12);">
-          <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); color: var(--primary-green); padding: 0.4rem 0.7rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
-            <i class="fa-solid fa-tree"></i>
-            Palmyra Heritage
+          <div class="story-image">
+            <img src="images/Panaiyeri/pandian_family.png" alt="Palmyra Landscape">
+            <div class="story-tag"><i class="fa-solid fa-tree"></i> Palmyra Heritage</div>
           </div>
         </div>
-        <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(1200px 600px at -10% 20%, rgba(45,90,61,0.06), transparent 60%), radial-gradient(800px 800px at 110% 80%, rgba(45,90,61,0.06), transparent 60%); opacity: 0.3; border-radius: 18px;"></div>
-      </div>
+     <!--</div>-->
 
       <!-- Video Section -->
       <div style="background: var(--light-green); padding: 3rem 2rem; border-radius: 15px; margin-top: 2rem; text-align: center;">
@@ -676,7 +845,7 @@
         </h2>
         <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 30px var(--shadow); max-width: 800px; margin: 0 auto;">
           <video 
-            src="media/palm_extract.mp4"
+            src="media/palm_extract_transcipt.mp4"
             autoplay
             muted
             loop
