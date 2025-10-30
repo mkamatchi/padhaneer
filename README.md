@@ -5,6 +5,10 @@ It combines interactive maps, AI-powered Q&A, and open-source collaboration to r
 
 ---
 
+📄 [View Technical Documentation (PDF)](docs/Padhneer_Technical_Documentation.pdf)
+
+---
+
 ## 🚀 Project Overview
 
 - Built with **HTML, CSS, and JavaScript** for the frontend
